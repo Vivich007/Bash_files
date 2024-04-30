@@ -10,7 +10,6 @@ file_contents="data.txt"
 # Put the content of the line in the file in a variable
 line_number=2  # Specify the line number you want to read
 line2=$(sed -n "${line_number}p" $file_contents)
-echo "Line 2 of the file data.txt contains numbers: $line2"
 
 # Initialize sum
 sum=0
@@ -24,7 +23,7 @@ for num in "${num_array[@]}"; do
 done
 
 # Output the sum
-echo "Sum of the numbers in line 2: $sum"
+echo "Sum of the numbers in line 2 ($line2): $sum"
 
 
 
@@ -46,7 +45,7 @@ for value in "${values_array[@]}"; do
         max_value="$value"
     fi
 done
-echo "Maximum value in line 3 is $max_value"
+echo "Maximum value in line 3 ($line3) is $max_value"
 
 
 
@@ -55,13 +54,13 @@ echo "Maximum value in line 3 is $max_value"
 # Put the content of the line in the file in a variable
 line_number=4  # Specify the line number you want to read
 line4=$(sed -n "${line_number}p" $file_contents)
-echo $line4
+
 # Initialize variables
 sum=0
 count=0
 
 # Split the list of numbers into individual values
-IFS=' ' read -r -a number_array <<< "$line4"
+IFS=',' read -r -a number_array <<< "$line4"
 
 # Calculate the sum of numbers and count the total numbers
 for number in "${number_array[@]}"; do
@@ -70,7 +69,8 @@ for number in "${number_array[@]}"; do
 done
 
 # Calculate the average
-average=$(echo "$sum / $count")
+
+average=$((sum/count))
 
 # Output the average
-echo "Average value: $average"
+echo "Average value of line 4 numbers ($line4): $average"
